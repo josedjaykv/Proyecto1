@@ -3,6 +3,7 @@ from django.http import HttpResponse
 import datetime
 from django.template import Template, Context
 from django.template import loader
+from django.shortcuts import render
 
 
 
@@ -17,22 +18,12 @@ class persona(object):
 
 #La fucion recibe un request, cada funcion en el archivo views son vistas
 def saludo(request): #primera vista    
-    p1 = persona('Jose', 'Jayk Vanegas')
+    p1 = persona('Jose', 'Vanegas')
     fecha_actual = datetime.datetime.now()
     temas_del_curso = ['Plantillas', 'Modelos', 'Formularios', 'Vistas', 'Despliegue']
-
-    #doc_externo = open("C:/Users/HP/OneDrive/Escritorio/Proyecto 2/ProyectosDjango/Proyecto1/Proyecto1/plantillas/miplantilla.html")
-    #plt = Template(doc_externo.read())
-    #doc_externo.close()
-
-    doc_externo = loader.get_template('miplantilla.html')
-
+ 
     diccionario = {'nombre_persona':p1.nombre, 'apellido_persona':p1.apellido, 'fecha':fecha_actual, 'temas':temas_del_curso}
-
-    #ctx = Context({'nombre_persona':p1.nombre, 'apellido_persona':p1.apellido, 'fecha':fecha_actual, 'temas':temas_del_curso})
-
-    documento = doc_externo.render(diccionario)
-    return HttpResponse(documento)
+    return HttpResponse(render(request, "miplantilla.html", diccionario))
 
 
 
@@ -66,3 +57,12 @@ def calEdad(request, year, edad):
 
     return HttpResponse(mensaje)
     #http://localhost:8000/edades/2050
+
+def cursoC(request):
+    fecha_actual = datetime.datetime.now()
+    return render(request, "CursoC.html", {"fecha":fecha_actual})
+
+def cursoCss(request):
+    fecha_actual = datetime.datetime.now()
+    return render(request, "CursoCss.html", {"fecha":fecha_actual})
+
