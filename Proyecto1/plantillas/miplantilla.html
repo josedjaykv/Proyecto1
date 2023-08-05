@@ -1,0 +1,32 @@
+<html>
+
+<body>
+    <h2 style="color:red">
+        Hola gente, primer plantilla!
+    </h2>
+
+    {# Diseñador ingnora esta parte #}
+
+    {% if nombre_persona == 'Jose David' %}
+        <p>Esto lo hace un estudiante de la EIA</p>
+    {% else %}
+        <p>Esto lo hace un estudiante de la UDEA</p>
+    {% endif %}
+
+    <p>Mi nombre es {{nombre_persona|lower}} {{apellido_persona.upper}}</p>
+    <p>La fecha actual es {{fecha.day}} / {{fecha.month}} / {{fecha.year}}</p>
+    <p><strong>Temas del curso:</strong></p>
+    <p>
+    <ul>
+        {% if temas %}
+            {% for elTema in temas %}
+                <li>{{elTema|first|lower}}</li>
+            {% endfor %}
+        {% else %}
+            <p>No hay temas</p>
+        {% endif %}
+    </ul>
+    </p>
+</body>
+
+</html>
